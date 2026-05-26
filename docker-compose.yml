@@ -17,7 +17,6 @@ services:
       - "8080:8080"
     volumes:
       - ./zenstage:/data
-      - ./.tst-team.yml:/data/organization/peoples/tst-team.yml
   # run all importer pods as cron job (intervals 15-60 minutes)
   importer-gitlab:
     image: zenstage/importer:rc
