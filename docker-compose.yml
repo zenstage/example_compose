@@ -1,0 +1,44 @@
+services:
+  zenstage:
+    image: zenstage/zenstage:rc
+    environment:
+      TZ: "Europe/Warsaw"
+      ZENSTAGE_API_KEY: ${ZENSTAGE_API_TOKEN} # will be changed, this token will be required to authenticate importers in api
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      ZENSTAGE_OAUTH_URL: ${ZENSTAGE_OAUTH_URL}
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_EXTERNAL_CLIENT_ID: ${SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_EXTERNAL_CLIENT_ID}
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_EXTERNAL_CLIENT_SECRET: ${SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_EXTERNAL_CLIENT_SECRET}
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_EXTERNAL_SCOPE: "openid,profile,groups"
+      SPRING_SECURITY_OAUTH2_PROVIDER_EXTERNAL_USER_NAME_ATTRIBUTE: "sub"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./zenstage:/data
+      - ./.tst-team.yml:/data/organization/peoples/tst-team.yml
+  # run all importer pods as cron job (intervals 15-60 minutes)
+  importer-gitlab:
+    image: zenstage/importer:rc
+    environment:
+      TZ: "Europe/Warsaw"
+      ZENSTAGE_IMPORT: "gitlab"
+      ZENSTAGE_URL: "http://zenstage:8080/api/v1"
+      ZENSTAGE_API_TOKEN: ${ZENSTAGE_API_TOKEN}
+      ZS_PROJ_ZS: zen_stage:zenstage
+      ZS_PROJ_DEMO: zen_stage_demo:zenstage_demo
+      CI_API_V4_URL: ${CI_API_V4_URL}
+      CI_JOB_TOKEN: ${CI_JOB_TOKEN}
+  importer-jira:
+    image: zenstage/importer:rc
+    environment:
+      TZ: "Europe/Warsaw"
+      ZENSTAGE_IMPORT: "jira"
+      ZENSTAGE_URL: "http://zenstage:8080/api/v1"
+      ZENSTAGE_API_TOKEN: ${ZENSTAGE_API_TOKEN}
+      JIRA_BASE_URL: ${JIRA_BASE_URL}
+      JIRA_PROJECT_KEYS: ZENSTAGE
+      JIRA_EMAIL: ${JIRA_EMAIL}
+      JIRA_API_TOKEN: ${JIRA_API_TOKEN}
+      JIRA_EXCLUDED_STATUS: "Cancelled"

@@ -1,0 +1,31 @@
+- id: 1
+  name: Krzysztof Jarzyna
+  email: krzysztof.jarzyna@zenstage.pl
+- id: 2
+  technical: true # technical user, commits are loaded and excluded from reports
+  name: Automat
+  email: zenstage-automat@zenstage.pl
+  commiterEmails:
+    - Administrator@iMac-Administrator.local
+    - zenstage-automat@organization.com
+- id: 3
+  name: Dominik Nowakowski
+  commiterEmails:
+    - Jan Kowalski # when gitlab doesn't force commiter email. Extra mapping emails
+    - jan.kowalski@organization.com
+    - jan.kowalski@gmail.com
+    - jankowalski@gmail.com
+- id: 4
+  name: Stefan Krupa
+  commiterEmails:
+    - stefan.krupa@gmail.com
+    - stefan@nd.nd
+- id: 2
+  name: Piotr Nowak
+  email: piotr.nowak@zenstage.pl
+- id: 3
+  name: Małgorzata Nowak
+  email: malgorzata.nowak@zenstage.pl
+- id: 4
+  name: Piotr Wiśniewski
+  email: piotr.wisniewski@zenstage.pl
