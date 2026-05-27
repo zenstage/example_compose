@@ -1,4 +1,4 @@
-- id: 1
+- id: 1 # id must match with SSO value 'SPRING_SECURITY_OAUTH2_PROVIDER_EXTERNAL_USER_NAME_ATTRIBUTE' to grant permission project
   name: Krzysztof Jarzyna
   email: krzysztof.jarzyna@zenstage.pl
 - id: 2
